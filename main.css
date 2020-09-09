@@ -1,174 +1,132 @@
-@import url('https://fonts.googleapis.com/css?family=Nunito+Sans');
-:root {
-  --blue: #0e0620;
-  --white: #fff;
-  --green: #2ccf6d;
-}
-html,
-body {
-  height: 100%;
-}
-body {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family:"Nunito Sans";
-  color: var(--blue);
-  font-size: 1em;
-}
-button {
-  font-family:"Nunito Sans";
-}
-ul {
-  list-style-type: none;
-  padding-inline-start: 35px;
-}
-svg {
-  width: 100%;
-  visibility: hidden;
-}
-h1 {
-  font-size: 7.5em;
-  margin: 15px 0px;
-  font-weight:bold;
-}
-h2 {
-  font-weight:bold;
-}
-.hamburger-menu {
-  position: absolute;
-  top: 0;
-  left: 0;
-  padding: 35px;
-  z-index: 2;
+@import url('https://fonts.googleapis.com/css?family=Fira+Sans')
+/*Variables*/
+$background_color: #353b48
+$font: "Fira Sans", sans-serif
+$white: #f5f6fa
+$black: #0C0E10
+$gray: #202425
+$blue: #446182
+//Mixins
+=smallscreens
+    @media (max-width: 770px)
+        @content
+//Extends
+%Ycenter
+    position: absolute
+    top: 50%
+    transform: translateY(-50%)
+//Main Layout Styles
+*
+    box-sizing: border-box
 
-  & button {
-    position: relative;
-    width: 30px;
-    height: 22px;
-    border: none;
-    background: none;
-    padding: 0;
-    cursor: pointer;
+html, body
+    margin: 0
+    padding: 0
+body
+    font-family: $font
+    color: $white
+.background
+    position: absolute
+    top: 0
+    left: 0
+    width: 100%
+    height: 100%
+    background: linear-gradient($black, $blue)
+    .ground
+        position: absolute
+        bottom: 0
+        width: 100%
+        height: 25vh
+        background: $black
+        +smallscreens
+            height: 0vh
 
-    & span {
-      position: absolute;
-      height: 3px;
-      background: #000;
-      width: 100%;
-      left: 0px;
-      top: 0px;
-      transition: 0.1s ease-in;
-      &:nth-child(2) {
-        top: 9px;
-      }
-      &:nth-child(3) {
-        top: 18px;
-      }
-    }
-  }
-  & [data-state="open"] {
-    & span {
-      &:first-child {
-        transform: rotate(45deg);
-        top: 10px;
-      }
-      &:nth-child(2) {
-        width: 0%;
-        opacity:0;
-      }
-      &:nth-child(3) {
-        transform: rotate(-45deg);
-        top: 10px;
-      }
-    }
-  }
-}
-nav {
-  position: absolute;
-  height: 100%;
-  top: 0;
-  left: 0;
-  background: var(--green);
-  color: var(--blue);
-  width: 300px;
-  z-index: 1;
-  padding-top: 80px;
-  transform: translateX(-100%);
-  transition: 0.24s cubic-bezier(.52,.01,.8,1);
-  & li {
-    transform: translateX(-5px);
-    transition: 0.16s cubic-bezier(0.44, 0.09, 0.46, 0.84);
-    opacity: 0;
-  }
-  & a {
-    display: block;
-    font-size: 1.75em;
-    font-weight: bold;
-    text-decoration: none;
-    color: inherit;
-    transition: 0.24s ease-in-out;
-    &:hover {
-      text-decoration: none;
-      color: var(--white);
-    }
-  }
-  &[data-state="open"] {
-    transform: translateX(0%);
-    & ul {
-      @for $i from 1 through 4 {
-        li:nth-child(#{$i}) {
-          transition-delay: 0.16s * $i;
-          transform: translateX(0px);
-          opacity: 1;
-        }
-      }
-    }
-  }
-}
-.btn {
-  z-index: 1;
-  overflow: hidden;
-  background: transparent;
-  position: relative;
-  padding: 8px 50px;
-  border-radius: 30px;
-  cursor: pointer;
-  font-size: 1em;
-  letter-spacing: 2px;
-  transition: 0.2s ease;
-  font-weight: bold;
-  margin: 5px 0px;
-  &.green {
-    border: 4px solid var(--green);
-    color: var(--blue);
-    &:before {
-      content: "";
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 0%;
-      height: 100%;
-      background: var(--green);
-      z-index: -1;
-      transition: 0.2s ease;
-    }
-    &:hover {
-      color: var(--white);
-      background: var(--green);
-      transition: 0.2s ease;
-      &:before {
-        width: 100%;
-      }
-    }
-  }
-}
-@media screen and (max-width:768px) {
-  body {
-    display:block;
-  }
-  .container {
-    margin-top:70px;
-    margin-bottom:70px;
-  }
-} 
+.container
+    position: relative
+    margin: 0 auto
+    width: 85%
+    height: 100vh
+    padding-bottom: 25vh
+    display: flex
+    flex-direction: row
+    justify-content: space-around
+    +smallscreens
+        flex-direction: column
+        padding-bottom: 0vh
+.left-section, .right-section
+    position: relative
+//Left Section Styles
+.left-section
+    width: 40%
+    +smallscreens
+        width: 100%
+        height: 40%
+        position: absolute
+        top: 0
+    .inner-content
+        @extend %Ycenter
+        +smallscreens
+            position: relative
+            padding: 1rem 0
+.heading
+    text-align: center
+    font-size: 9em
+    line-height: 1.3em
+    margin: 2rem 0 0.5rem 0
+    padding: 0
+    text-shadow: 0 0 1rem #fefefe
+    +smallscreens
+        font-size: 7em
+        line-height: 1.15
+        margin: 0
+.subheading
+    text-align: center 
+    max-width: 480px
+    font-size: 1.5em
+    line-height: 1.15em
+    padding: 0 1rem 
+    margin: 0 auto
+    +smallscreens
+        font-size: 1.3em
+        line-height: 1.15
+        max-width: 100%
+//Right Section Styles
+.right-section
+    width: 50%
+    +smallscreens
+        width: 100%
+        height: 60%
+        position: absolute
+        bottom: 0
+.svgimg
+    position: absolute
+    bottom: 0
+    padding-top: 10vh
+    padding-left: 1vh
+    max-width: 100%
+    max-height: 100%
+    +smallscreens
+        padding: 0
+    .bench-legs
+        fill: $black
+    .top-bench, .bottom-bench
+        stroke: $black 
+        stroke-width: 1px
+        fill: #5B3E2B
+    .bottom-bench path:nth-child(1)
+        fill: darken(#5B3E2B,7%)
+    .lamp-details
+        fill: $gray
+    .lamp-accent
+        fill: lighten($gray, 5%)
+    .lamp-bottom
+        fill: linear-gradient($gray, $black)
+    .lamp-light
+        fill: #EFEFEF
+@keyframes glow
+    0%
+        text-shadow: 0 0 1rem #fefefe
+    50% 
+        text-shadow: 0 0 1.85rem #ededed
+    100%
+        text-shadow: 0 0 1rem #fefefe
